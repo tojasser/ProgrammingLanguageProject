@@ -44,7 +44,6 @@ public class MainFrame extends javax.swing.JFrame {
         input_txt.setRows(5);
         jScrollPane1.setViewportView(input_txt);
 
-        output_txt.setEditable(false);
         output_txt.setColumns(20);
         output_txt.setRows(5);
         jScrollPane2.setViewportView(output_txt);
@@ -142,7 +141,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea input_txt;
     private javax.swing.JButton jButton1;
@@ -150,6 +150,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea output_txt;
+    public static javax.swing.JTextArea output_txt;
     // End of variables declaration//GEN-END:variables
 }
