@@ -12,23 +12,23 @@ import java.util.regex.*;
  *
  * @author Dosha
  */
-public class Main extends Object
-implements Serializable {
 
+public class Main {
+    
+    static MainFrame mainFrame;
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         
-        MainFrame mainFrame = new MainFrame();
-        
-
+        mainFrame = new MainFrame();
         mainFrame.setVisible(true);
+        
     }
-    
-    
-    
+
+        
+ 
     static boolean FilterInput(String input)
     {
         //This is a regex to check if the input is written in the correct way
@@ -40,9 +40,11 @@ implements Serializable {
         return m.matches();
     }
     
-    //The compile starting Point
-    static String startCompile(String input_txt) {
+
     
+    
+       
+        static String startCompile(String input_txt){
         //split the string by line
         String[] statements = input_txt.split("\\n");
         int lineNumber = 0;
@@ -61,10 +63,8 @@ implements Serializable {
            //to keep the current line in variable
            lineNumber++;
         }
-
-       
-        return "Correct expersion";
-        
-    }
-    
+            return "Correct expersion";
+        }
 }
+        
+
