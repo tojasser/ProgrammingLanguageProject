@@ -105,7 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         
         
-        Main.startCompile(input_txt.getText());
+     output_txt.setText(Main.startCompile(input_txt.getText()) );
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
