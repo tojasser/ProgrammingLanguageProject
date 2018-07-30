@@ -50,16 +50,23 @@ public class Main {
         return m.matches();
     }
     
+    static String seperation(String input)
+    {
+        String s = input.replaceAll(" ", "" );
+        s = s.replaceAll("[^a-zA-Z0-9]", " $0 " );
+        return s;
+    }
     static void compile(String statement){
         
-        String [] list = statement.split(" ");
+        String [] list = statement.split("( )");
         Pattern p = Pattern.compile("\\d+");
         
         for (int i = 0; i < list.length; i++) {
             String s = list[i];
             Matcher m = p.matcher(s);
             lexeme.add(i,s);
-            
+            if(s.equals(" "))
+                continue;
             
         
             if (m.find())//if find number
@@ -113,6 +120,10 @@ public class Main {
            if(! FilterInput(statement.trim()))
             return lineNumber + " | " + statement.trim() +" <= Incorrect expersion";
            
+           
+           //seperate symbols from words and numbers 
+           statement = seperation(statement);
+           System.out.println(statement);
            //Statement is correct so Start compiling :)           
            compile(statement);
            
