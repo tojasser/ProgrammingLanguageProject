@@ -6,6 +6,7 @@
 package programminglanguagesproject;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.regex.*;
 
@@ -17,8 +18,8 @@ import java.util.regex.*;
 public class Main {
     
     static MainJFrame mainFrame;
-    static LinkedList lexeme = new LinkedList();
-    static LinkedList token = new LinkedList();
+    static ArrayList lexeme = new ArrayList();
+    static ArrayList token = new ArrayList();
     /**
      * @param args the command line arguments
      */
@@ -65,6 +66,12 @@ public class Main {
                 token.add(i,"INT_LIT");
             else{
             switch (s){
+                case " ":
+                    break;
+                
+                case "+":
+                    token.add(i,"PLUS_OP");
+                    break;
                 case "=":
                     token.add(i,"ASSIGN_OP");
                     break;
@@ -109,18 +116,12 @@ public class Main {
            //Statement is correct so Start compiling :)           
            compile(statement);
            
-           
-           
-           
            //to keep the current line in variable
            lineNumber++;
         }
+            lineNumber = 0;
             return "Correct expersion";
         }
-        
-        
- 
-      
 }
         
 

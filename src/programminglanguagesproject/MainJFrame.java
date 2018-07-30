@@ -5,6 +5,8 @@
  */
 package programminglanguagesproject;
 
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author talal
@@ -32,6 +34,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         outputjTextField1 = new javax.swing.JTextField();
         compile_jButton1 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        outputTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -45,6 +49,14 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jLabel2.setText("Output");
 
+        outputjTextField1.setEditable(false);
+        outputjTextField1.setColumns(200);
+        outputjTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                outputjTextField1ActionPerformed(evt);
+            }
+        });
+
         compile_jButton1.setText("Compile");
         compile_jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -52,40 +64,52 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        outputTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {"x","y"},
+            },
+            new String [] {
+                "Lexeme", "Tokens"
+            }
+        ));
+        jScrollPane1.setViewportView(outputTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(482, 482, 482))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(input_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(outputjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 1259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(215, 215, 215)
-                        .addComponent(compile_jButton1)))
+                        .addGap(326, 326, 326)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(input_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(compile_jButton1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(outputjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(input_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addComponent(compile_jButton1)
-                .addGap(120, 120, 120)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(outputjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(247, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(outputjTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(input_jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(compile_jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
@@ -100,23 +124,41 @@ public class MainJFrame extends javax.swing.JFrame {
         
         
         
-          String x=" ";
-          x+=Main.startCompile(input_jTextField1.getText())+" : ";
-     outputjTextField1.setText( x); 
-    //  token_TextField1.setText(Main.token.toString()+"\n"+"\\d");
-     // lexeme_TextField1.setText(Main.lexeme.toString());
-      
+         String x ="";
+         x = Main.startCompile(input_jTextField1.getText());     
+          
       for( int i=0;i<Main.token.size();i++){
-         x+="  "+ "[ "+Main.lexeme.get(i).toString()+" ] "+" ===> "+Main.token.get(i).toString()+".      ";
+         x+="\n[ "+Main.lexeme.get(i).toString()+" ] "+" ===> "+Main.token.get(i).toString()+" ||\n";
       }
       
-      
-     
-      
+      //A 2d array to hold the data from the two arrays in the Main class 
+      Object[][] data = new Object[Main.lexeme.size()+1][Main.token.size()+1];
+      for(int i = 0 ; i < Main.lexeme.size();i++)
+      {
+        // this is to set the token 
+        data[i][0]   =   Main.lexeme.get(i).toString();
+          for(int j = 0 ; j <Main.token.size();j++)
+          data[i][j+1]   =   Main.token.get(i).toString();
+      }
+      //set the model to show the lexeme / tokens table
+      outputTable.setModel(new javax.swing.table.DefaultTableModel(
+              data
+              ,
+            new String [] {
+            "Lexeme", "Tokens"
+            }
+        ));
+       // show in the output textbox
        outputjTextField1.setText(x);
        
-       
+       //clear the arrays
+       Main.token.clear();
+       Main.lexeme.clear();
     }//GEN-LAST:event_compile_jButton1ActionPerformed
+
+    private void outputjTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outputjTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_outputjTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,6 +200,8 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JTextField input_jTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable outputTable;
     private javax.swing.JTextField outputjTextField1;
     // End of variables declaration//GEN-END:variables
 }
