@@ -56,26 +56,29 @@ public class Main {
         s = s.replaceAll("[^a-zA-Z0-9]", " $0 " );
         return s;
     }
+    public static boolean isNullOrWhiteSpace(String value) {
+    return value == null || value.trim().isEmpty();
+    }
+    
     static void compile(String statement){
         
         String [] list = statement.split("( )");
         Pattern p = Pattern.compile("\\d+");
-        
+       
         for (int i = 0; i < list.length; i++) {
+
+            
             String s = list[i];
             Matcher m = p.matcher(s);
+            s = s.trim();
             lexeme.add(i,s);
-            if(s.equals(" "))
-                continue;
             
-        
+            
+            
             if (m.find())//if find number
                 token.add(i,"INT_LIT");
             else{
             switch (s){
-                case " ":
-                    break;
-                
                 case "+":
                     token.add(i,"PLUS_OP");
                     break;
@@ -103,12 +106,12 @@ public class Main {
                 default:
                     token.add(i, "IDENT");
                     
-                }               
-            }
+                    }               
+                }
+            
         }
+        
     }
-    
-    
        
         static String startCompile(String input_txt){
         //split the string by line
@@ -130,9 +133,21 @@ public class Main {
            //to keep the current line in variable
            lineNumber++;
         }
+            filterTokensAndLexemes();
             lineNumber = 0;
             return "Correct expersion";
         }
+
+    private static void filterTokensAndLexemes() {
+        for(int i = 0 ; i < Main.lexeme.size();i++)
+         {
+          if(Main.isNullOrWhiteSpace(Main.lexeme.get(i).toString()))
+          {
+              Main.lexeme.remove(i);
+              Main.token.remove(i);
+          }
+         }   
+    }
 }
         
 

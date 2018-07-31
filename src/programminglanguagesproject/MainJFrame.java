@@ -126,11 +126,7 @@ public class MainJFrame extends javax.swing.JFrame {
         
          String x ="";
          x = Main.startCompile(input_jTextField1.getText());     
-          
-      for( int i=0;i<Main.token.size();i++){
-         x+="\n[ "+Main.lexeme.get(i).toString()+" ] "+" ===> "+Main.token.get(i).toString()+" ||\n";
-      }
-      
+
       //A 2d array to hold the data from the two arrays in the Main class 
       Object[][] data = new Object[Main.lexeme.size()+1][Main.token.size()+1];
       for(int i = 0 ; i < Main.lexeme.size();i++)
@@ -139,7 +135,11 @@ public class MainJFrame extends javax.swing.JFrame {
         data[i][0]   =   Main.lexeme.get(i).toString();
           for(int j = 0 ; j <Main.token.size();j++)
           data[i][j+1]   =   Main.token.get(i).toString();
+        x+="\n[ "+Main.lexeme.get(i).toString()+" ] "+" ===> "+Main.token.get(i).toString()+" ||\n";
+
       }
+      
+      
       //set the model to show the lexeme / tokens table
       outputTable.setModel(new javax.swing.table.DefaultTableModel(
               data
