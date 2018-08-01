@@ -26,6 +26,9 @@ public class Main {
     public static void main(String[] args) {
         // TODO code application logic here
         
+      
+        
+        
     
      
        
@@ -45,9 +48,11 @@ public class Main {
     {
         //This is a regex to check if the input is written in the correct way
         // the general form is <Variable> = <anything> ; also any white space is allowed 
-        Pattern p = Pattern.compile("[a-z]*\\s?=\\s?(.*?)\\s?;\\n?");
+        Pattern p = Pattern.compile("^[a-zA-Z]+$*\\s?=\\s?(.*?)\\s?;\\n?");
         Matcher m = p.matcher(input);
         return m.matches();
+       
+       
     }
     
     static String seperation(String input)
@@ -102,6 +107,9 @@ public class Main {
                     break;
                 case ";":
                     token.add(i,"SEMI_COL");
+                    break;
+                case "/":
+                    token.add(i,"DIV_OP");
                     break;
                 default:
                     token.add(i, "IDENT");
